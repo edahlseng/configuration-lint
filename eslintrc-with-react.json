@@ -8,8 +8,6 @@
 			"jsx": true
 		}
 	},
-	"plugins": [
-		"react"
-	],
-	"rules": { }
+	"plugins": ["react"],
+	"rules": {}
 }
