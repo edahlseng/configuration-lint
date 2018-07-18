@@ -4,7 +4,8 @@
 	},
 	"extends": [
 		"eslint:recommended",
-		"plugin:prettier/recommended"
+		"plugin:prettier/recommended",
+		"plugin:flowtype/recommended"
 	],
 	"parser": "babel-eslint",
 	"parserOptions": {
@@ -27,6 +28,7 @@
 		"no-var": "error",
 		"prefer-arrow-callback": "error",
 		"prefer-const": "error",
-		"spaced-comment": ["error", "always"]
+		"spaced-comment": ["error", "always"],
+		"flowtype/require-valid-file-annotation": ["error", "always", {"annotationStyle": "block"}]
 	}
 }
