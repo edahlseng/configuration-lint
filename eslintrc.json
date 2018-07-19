@@ -19,6 +19,7 @@
 		"process": false
 	},
 	"rules": {
+		"arrow-body-style": ["error", "as-needed"],
 		"curly": ["warn", "multi-line"],
 		"global-require": "error",
 		"linebreak-style": ["error", "unix"],
