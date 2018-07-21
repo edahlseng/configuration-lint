@@ -1,6 +1,6 @@
 {
   "name": "@eric.dahlseng/linter-configuration",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Linter Configuration",
   "dependencies": {
     "babel-eslint": "^8.2.3",

@@ -34,6 +34,11 @@
 			"error",
 			"always",
 			{ "annotationStyle": "block" }
+		],
+		"flowtype/space-after-type-colon": [
+			"error",
+			"always",
+			{ "allowLineBreak": true }
 		]
 	}
 }

@@ -1,6 +1,11 @@
 Changelog
 =========
 
+v0.1.2 (2018 July 20)
+---------------------
+
+* Explicitly set "flowtype/space-after-type-colon" ESLint rule in order to turn on the "allowLineBreak" setting (otherwise the rule conflicts with Prettier)
+
 v0.1.1 (2018 July 19)
 ---------------------
 
