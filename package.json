@@ -21,6 +21,7 @@
   },
   "license": "MIT",
   "scripts": {
+    "check": "npm run lint:json",
     "lint:json": "prettier --config .prettierrc.js --list-different '**/*.json'"
   }
 }
