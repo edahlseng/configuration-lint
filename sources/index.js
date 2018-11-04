@@ -21,6 +21,7 @@ import setupPrettier from "./prettier.js";
 import setupJavascript from "./javascript.js";
 import setupCss from "./css.js";
 import setupTerraform from "./terraform.js";
+import setupCommit from "./commit.js";
 
 const setupMap = {
 	css: projectRootDirectory => setupCss(projectRootDirectory),
@@ -73,6 +74,7 @@ const script = fromCommand("npm prefix", { cwd: process.env.INIT_CWD })
 			.map(
 				concat([
 					setupPrettier(projectRootDirectory),
+					setupCommit(projectRootDirectory),
 				])
 			)
 	)
