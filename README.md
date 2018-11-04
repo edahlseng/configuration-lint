@@ -18,6 +18,7 @@ After installing, run `npx linter-configuration setup [languages]` to set up con
 Available languages:
 * `css`
 * `javascript` or `js`
+* `terraform` or `tf`
 
 
 ### Example

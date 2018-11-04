@@ -20,10 +20,12 @@ import { deDuplicate, futureSequential } from "./utils.js";
 import setupPrettier from "./prettier.js";
 import setupJavascript from "./javascript.js";
 import setupCss from "./css.js";
+import setupTerraform from "./terraform.js";
 
 const setupMap = {
 	css: projectRootDirectory => setupCss(projectRootDirectory),
 	javascript: projectRootDirectory => setupJavascript(projectRootDirectory),
+	terraform: projectRootDirectory => setupTerraform(projectRootDirectory),
 };
 
 const validateSupportedLanguages = languages => {
@@ -44,6 +46,7 @@ const languagesWithoutAbbreviations = map(
 	language =>
 		({
 			js: "javascript",
+			tf: "terraform",
 		}[language] || language)
 );
 
