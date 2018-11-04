@@ -1,0 +1,6 @@
+*
+!dist/*
+!eslintrc-with-react.json
+!eslintrc.json
+!prettierrc.json
+!stylelintrc.json
