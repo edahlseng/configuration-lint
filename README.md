@@ -10,37 +10,16 @@ Installation
 npm install --save-dev @edahlseng/linter-configuration
 ```
 
-ESLint Usage
-------------
+Usage
+-----
 
-Make the contents of `.eslintrc.js` equal to one of the following:
+After installing, run `npx linter-configuration setup [languages]` to set up configuration for the desired languages.
 
-```javascript
-module.exports = require("@eric.dahlseng/linter-configuration/eslintrc");
-```
+Available languages:
+* `css`
+* `javascript` or `js`
 
-or
 
-```javascript
-module.exports = require("@eric.dahlseng/linter-configuration/eslintrc-with-react");
-```
+### Example
 
-Prettier Usage
---------------
-
-Make the contents of `.prettierrc.js` equal to one of the following:
-
-```javascript
-module.exports = require("@eric.dahlseng/linter-configuration/prettierrc");
-```
-
-Stylelint Usage
----------------
-
-Make the contents of `.stylelintrc.json` equal to:
-
-```json
-{
-	"extends": "@eric.dahlseng/linter-configuration/stylelintrc"
-}
-```
+Running `npx linter-configuration setup js` will add a `.eslintrc.json` configuration file to the project root, as well as add a `lint:js` NPM run-script to the project's `package.json`.
