@@ -2,7 +2,10 @@
   "name": "@eric.dahlseng/linter-configuration",
   "version": "0.2.0",
   "description": "Linter Configuration",
-  "bin": "./dist/index.js",
+  "bin": {
+    "linter-configuration": "./dist/index.js",
+    "prettier-junit": "./dist/prettier-junit.sh"
+  },
   "dependencies": {
     "@commitlint/cli": "^7.2.1",
     "@commitlint/config-conventional": "^7.1.2",
@@ -38,6 +41,7 @@
     "lint:js": "eslint ./",
     "lint:json": "prettier --config .prettierrc.js --list-different '**/*.json'",
     "lint-report:js": "eslint ./ --output-file ./linting-results/eslint/report.xml --format junit",
+    "lint-report:json": "mkdir -p ./linting-results/prettier-json && ./sources/prettier-junit.sh --config .prettierrc.js '**/*.json' > ./linting-results/prettier-json/report.xml",
     "prepare": "npm run build",
     "release": "standard-version"
   },
