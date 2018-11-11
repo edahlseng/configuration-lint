@@ -20,6 +20,7 @@ Available languages:
 * `javascript` or `js`
 * `terraform` or `tf`
 * `typescript` or `ts`
+* `yaml` or `yml`
 
 In addition to configuration for all of the specified languages, the setup script will add configuration for Prettier, commitlint, and JSON linting.
 

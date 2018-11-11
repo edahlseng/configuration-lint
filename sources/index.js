@@ -22,11 +22,14 @@ import setupJavascript from "./javascript.js";
 import setupCss from "./css.js";
 import setupTerraform from "./terraform.js";
 import setupCommit from "./commit.js";
+import setupJson from "./json.js";
+import setupYaml from "./yaml.js";
 
 const setupMap = {
 	css: projectRootDirectory => setupCss(projectRootDirectory),
 	javascript: projectRootDirectory => setupJavascript(projectRootDirectory),
 	terraform: projectRootDirectory => setupTerraform(projectRootDirectory),
+	yaml: projectRootDirectory => setupYaml(projectRootDirectory),
 };
 
 const validateSupportedLanguages = languages => {
@@ -48,6 +51,7 @@ const languagesWithoutAbbreviations = map(
 		({
 			js: "javascript",
 			tf: "terraform",
+			yml: "yaml",
 		}[language] || language)
 );
 
@@ -74,6 +78,7 @@ const script = fromCommand("npm prefix", { cwd: process.env.INIT_CWD })
 			.map(
 				concat([
 					setupPrettier(projectRootDirectory),
+					setupJson(projectRootDirectory),
 					setupCommit(projectRootDirectory),
 				])
 			)
