@@ -19,7 +19,7 @@ const setupCommit = (projectRootDirectory: string) =>
 			addNpmScript({
 				packageJsonPath: path.resolve(projectRootDirectory, "./package.json"),
 				name: "lint:commit",
-				content: "commitlint --from origin/master",
+				content: "commitlint",
 			})
 		)
 	);
