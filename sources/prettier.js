@@ -20,6 +20,15 @@ const setupPrettier = (projectRootDirectory: string) =>
 					"prettier --config .prettierrc.js --list-different '**/*.json'",
 			})
 		)
-	);
+	).chain(
+		always(
+			addNpmScript({
+				packageJsonPath: path.resolve(projectRootDirectory, "./package.json"),
+				name: "lint-report:json",
+				content:
+					"mkdir -p ./linting-results/prettier-json && prettier-junit --config .prettierrc.js '**/*.json' > ./linting-results/prettier-json/report.xml"
+				})
+			)
+		);
 
 export default setupPrettier;
