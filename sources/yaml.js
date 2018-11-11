@@ -17,8 +17,8 @@ const setupYaml = (projectRootDirectory: string) =>
 				addNpmLintStep({
 					packageJsonPath: path.resolve(projectRootDirectory, "./package.json"),
 					step: "npm run lint:yaml",
-				})
-			)
+				}),
+			),
 		)
 		.chain(
 			always(
@@ -27,8 +27,8 @@ const setupYaml = (projectRootDirectory: string) =>
 					name: "lint-report:yaml",
 					content:
 						"mkdir -p ./linting-results/prettier-yaml && prettier-junit --config .prettierrc.js '**/*.yaml' '**/*.yml' > ./linting-results/prettier-yaml/report.xml",
-				})
-			)
+				}),
+			),
 		);
 
 export default setupYaml;

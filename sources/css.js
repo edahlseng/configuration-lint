@@ -25,16 +25,16 @@ const setupCss = (projectRootDirectory: string) =>
 					packageJsonPath: path.resolve(projectRootDirectory, "./package.json"),
 					name: "lint:css",
 					content: "stylelint '**/*.js'",
-				})
-			)
+				}),
+			),
 		)
 		.chain(
 			always(
 				addNpmLintStep({
 					packageJsonPath: path.resolve(projectRootDirectory, "./package.json"),
 					step: "npm run lint:css",
-				})
-			)
+				}),
+			),
 		)
 		.chain(
 			always(
@@ -43,8 +43,8 @@ const setupCss = (projectRootDirectory: string) =>
 					name: "lint-report:css",
 					content:
 						"mkdir -p ./linting-results/stylelint && stylelint '**/*.js' --custom-formatter './node_modules/stylelint-formatter-relative-junit' > ./linting-results/stylelint/report.xml",
-				})
-			)
+				}),
+			),
 		);
 
 export default setupCss;

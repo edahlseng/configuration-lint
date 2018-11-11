@@ -15,7 +15,7 @@ const setupTerraform = (projectRootDirectory: string) =>
 			addNpmLintStep({
 				packageJsonPath: path.resolve(projectRootDirectory, "./package.json"),
 				step: "npm run lint:tf",
-			})
-		)
+			}),
+		),
 	);
 export default setupTerraform;
