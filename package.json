@@ -40,8 +40,10 @@
     "lint:commit": "commitlint --from origin/master",
     "lint:js": "eslint ./",
     "lint:json": "prettier --config .prettierrc.js --list-different '**/*.json'",
+    "lint:yaml": "prettier --config .prettierrc.js --list-different '**/*.yaml' '**/*.yml'",
     "lint-report:js": "eslint ./ --output-file ./linting-results/eslint/report.xml --format junit",
     "lint-report:json": "mkdir -p ./linting-results/prettier-json && ./sources/prettier-junit.sh --config .prettierrc.js '**/*.json' > ./linting-results/prettier-json/report.xml",
+    "lint-report:yaml": "mkdir -p ./linting-results/prettier-yaml && ./sources/prettier-junit.sh --config .prettierrc.js '**/*.yaml' '**/*.yml' > ./linting-results/prettier-yaml/report.xml",
     "prepare": "npm run build",
     "release": "standard-version"
   },
