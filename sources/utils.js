@@ -50,7 +50,7 @@ export const addNpmScript = ({
 	readUtf8File(packageJsonPath)
 		.chain(jsonParse)
 		.chain(
-			ifElse(has(name), always(Future.of()), packageJson =>
+			ifElse(hasPath(["scripts", name]), always(Future.of()), packageJson =>
 				writePkg(
 					packageJsonPath,
 					assocPath(["scripts", name], content)(packageJson),
