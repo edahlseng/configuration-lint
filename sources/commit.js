@@ -3,7 +3,11 @@
 import path from "path";
 import { always } from "ramda";
 
-import { addNpmScript, setupConfigurationFile } from "./utils.js";
+import {
+	addNpmScript,
+	setupConfigurationFile,
+	addNpmLintStep,
+} from "./utils.js";
 
 const commitlintConfiguration = `{
 	"extends": ["./node_modules/@eric.dahlseng/linter-configuration/commitlintrc"]
@@ -23,6 +27,14 @@ const setupCommit = (projectRootDirectory: string) =>
 					content: "commitlint",
 				}),
 			),
+		)
+		.chain(
+			always(
+				addNpmLintStep({
+					packageJsonPath: path.resolve(projectRootDirectory, "./package.json"),
+					step: "npm run lint:commit -- --from master",
+				})
+			)
 		)
 		.chain(
 			always(
