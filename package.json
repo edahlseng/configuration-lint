@@ -37,7 +37,7 @@
     "eslint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
     "flow": "flow",
     "lint": "npm run lint:js; npm run lint:json",
-    "lint:commit": "commitlint --from origin/master",
+    "lint:commit": "commitlint",
     "lint:js": "eslint ./",
     "lint:json": "prettier --config .prettierrc.js --list-different '**/*.json'",
     "lint:yaml": "prettier --config .prettierrc.js --list-different '**/*.yaml' '**/*.yml'",
