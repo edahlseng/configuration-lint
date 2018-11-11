@@ -3,7 +3,11 @@
 import path from "path";
 import { always } from "ramda";
 
-import { addNpmScript, setupConfigurationFile } from "./utils.js";
+import {
+	addNpmScript,
+	setupConfigurationFile,
+	addNpmLintStep,
+} from "./utils.js";
 
 const eslintConfiguration = `{
 	"extends": ["./node_modules/@eric.dahlseng/linter-configuration/eslintrc.json"]
@@ -21,6 +25,14 @@ const setupJavascript = (projectRootDirectory: string) =>
 					packageJsonPath: path.resolve(projectRootDirectory, "./package.json"),
 					name: "lint:js",
 					content: "eslint ./",
+				})
+			)
+		)
+		.chain(
+			always(
+				addNpmLintStep({
+					packageJsonPath: path.resolve(projectRootDirectory, "./package.json"),
+					step: "npm run lint:js",
 				})
 			)
 		)

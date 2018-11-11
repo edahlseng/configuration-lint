@@ -2,7 +2,22 @@
 
 import fs from "fs";
 import Future from "fluture";
-import { always, assocPath, has, ifElse, reduce } from "ramda";
+import {
+	always,
+	assocPath,
+	ifElse,
+	reduce,
+	over,
+	lensPath,
+	pipe,
+	split,
+	union,
+	sort,
+	join,
+	map,
+	trim,
+} from "ramda";
+import { hasPath } from "ramda-adjunct";
 import { fileExists, readFile } from "@eric.dahlseng/cli-tools";
 import writePkgPromise from "write-pkg";
 
@@ -43,6 +58,35 @@ export const addNpmScript = ({
 				)
 			)
 		);
+
+const localeCompare = (a, b) => a.localeCompare(b);
+
+const addLintStep = step =>
+	pipe(
+		split(";"),
+		map(trim),
+		union([trim(step)]),
+		sort(localeCompare),
+		join("; ")
+	);
+
+export const addNpmLintStep = ({
+	packageJsonPath,
+	step,
+}: {
+	packageJsonPath: string,
+	step: string,
+}) =>
+	readUtf8File(packageJsonPath)
+		.chain(jsonParse)
+		.map(
+			ifElse(
+				hasPath(["scripts", "lint"]),
+				over(lensPath(["scripts", "lint"]))(addLintStep(step)),
+				assocPath(["scripts", "lint"])(step)
+			)
+		)
+		.chain(packageJson => writePkg(packageJsonPath, packageJson, {}));
 
 export const setupConfigurationFile = ({
 	configuration,
