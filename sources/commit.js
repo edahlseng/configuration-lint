@@ -33,8 +33,8 @@ const setupCommit = (projectRootDirectory: string) =>
 				addNpmLintStep({
 					packageJsonPath: path.resolve(projectRootDirectory, "./package.json"),
 					step: "npm run lint:commit -- --from master",
-				})
-			)
+				}),
+			),
 		)
 		.chain(
 			always(

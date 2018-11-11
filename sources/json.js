@@ -16,8 +16,8 @@ const setupPrettier = (projectRootDirectory: string) =>
 				addNpmLintStep({
 					packageJsonPath: path.resolve(projectRootDirectory, "./package.json"),
 					step: "npm run lint:json",
-				})
-			)
+				}),
+			),
 		)
 		.chain(
 			always(
@@ -26,8 +26,8 @@ const setupPrettier = (projectRootDirectory: string) =>
 					name: "lint-report:json",
 					content:
 						"mkdir -p ./linting-results/prettier-json && prettier-junit --config .prettierrc.js '**/*.json' > ./linting-results/prettier-json/report.xml",
-				})
-			)
+				}),
+			),
 		);
 
 export default setupPrettier;

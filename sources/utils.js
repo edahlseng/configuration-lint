@@ -32,7 +32,7 @@ export const writePkg = Future.encaseP3(writePkgPromise);
 
 export const futureSequential = reduce(
 	(acc, nextFuture) => acc.chain(() => nextFuture),
-	Future.of()
+	Future.of(),
 );
 
 export const deDuplicate = <A: *>(xs: Array<A>): Array<A> =>
@@ -54,9 +54,9 @@ export const addNpmScript = ({
 				writePkg(
 					packageJsonPath,
 					assocPath(["scripts", name], content)(packageJson),
-					{}
-				)
-			)
+					{},
+				),
+			),
 		);
 
 const localeCompare = (a, b) => a.localeCompare(b);
@@ -67,7 +67,7 @@ const addLintStep = step =>
 		map(trim),
 		union([trim(step)]),
 		sort(localeCompare),
-		join("; ")
+		join("; "),
 	);
 
 export const addNpmLintStep = ({
@@ -83,8 +83,8 @@ export const addNpmLintStep = ({
 			ifElse(
 				hasPath(["scripts", "lint"]),
 				over(lensPath(["scripts", "lint"]))(addLintStep(step)),
-				assocPath(["scripts", "lint"])(step)
-			)
+				assocPath(["scripts", "lint"])(step),
+			),
 		)
 		.chain(packageJson => writePkg(packageJsonPath, packageJson, {}));
 
@@ -98,6 +98,6 @@ export const setupConfigurationFile = ({
 	fileExists(filePath).chain(
 		ifTrueElse(
 			always(Future.of()),
-			always(writeUtf8FileToPath(configuration)(filePath))
-		)
+			always(writeUtf8FileToPath(configuration)(filePath)),
+		),
 	);

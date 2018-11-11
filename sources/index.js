@@ -35,13 +35,13 @@ const setupMap = {
 const validateSupportedLanguages = languages => {
 	const unsupportedLanguages = reject(
 		x => Object.keys(setupMap).includes(x),
-		languages
+		languages,
 	);
 	return unsupportedLanguages.length > 0
 		? Future.reject(
 				`Unsupported language${
 					unsupportedLanguages.length > 1 ? "s" : ""
-				}: ${unsupportedLanguages}`
+				}: ${unsupportedLanguages}`,
 		  )
 		: Future.of(languages);
 };
@@ -52,19 +52,19 @@ const languagesWithoutAbbreviations = map(
 			js: "javascript",
 			tf: "terraform",
 			yml: "yaml",
-		}[language] || language)
+		}[language] || language),
 );
 
 const validatedLanguages = pipe(
 	ifElse(
 		xs => xs.length < 4,
 		always(Future.reject("No languages specified")),
-		Future.of
+		Future.of,
 	),
 	map(slice(3, Infinity)),
 	map(languagesWithoutAbbreviations),
 	map(deDuplicate),
-	chain(validateSupportedLanguages)
+	chain(validateSupportedLanguages),
 );
 
 const languageSetupFutures = projectRootDirectory =>
@@ -80,8 +80,8 @@ const script = fromCommand("npm prefix", { cwd: process.env.INIT_CWD })
 					setupPrettier(projectRootDirectory),
 					setupJson(projectRootDirectory),
 					setupCommit(projectRootDirectory),
-				])
-			)
+				]),
+			),
 	)
 	.chain(futureSequential);
 
