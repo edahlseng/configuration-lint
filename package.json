@@ -1,6 +1,6 @@
 {
   "name": "@eric.dahlseng/linter-configuration",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Linter Configuration",
   "bin": {
     "linter-configuration": "./dist/index.js",
