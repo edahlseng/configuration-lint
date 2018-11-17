@@ -65,5 +65,10 @@
     "plugins": [
       "@babel/plugin-transform-modules-commonjs"
     ]
+  },
+  "standard-version": {
+    "skip": {
+      "tag": true
+    }
   }
 }
