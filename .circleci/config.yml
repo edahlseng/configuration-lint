@@ -1,17 +1,53 @@
 version: 2.1
 
-executors:
-  default:
-    docker:
-      - image: node:10.13.0-jessie
+orbs:
+  edahlseng: edahlseng/general@1.0.0
 
 jobs:
-  hello-world:
-    executor: default
+  release-pr:
+    executor: edahlseng/node
     steps:
-      - run: echo "Hello, World!"
+      - edahlseng/release-pr:
+          ssh-fingerprint: 7b:93:ce:c6:ff:f0:80:3d:04:68:e5:db:45:3f:fa:f6
+  tag-and-npm-publish:
+    executor: edahlseng/node
+    steps:
+      - edahlseng/tag-and-npm-publish:
+          ssh-fingerprint: 7b:93:ce:c6:ff:f0:80:3d:04:68:e5:db:45:3f:fa:f6
 
 workflows:
   main:
     jobs:
-      - hello-world
+      - edahlseng/install-dependencies-npm
+      - edahlseng/lint-commit:
+          requires:
+            - edahlseng/install-dependencies-npm
+      - edahlseng/lint-js:
+          requires:
+            - edahlseng/install-dependencies-npm
+      - edahlseng/lint-json:
+          requires:
+            - edahlseng/install-dependencies-npm
+      - edahlseng/lint-yaml:
+          requires:
+            - edahlseng/install-dependencies-npm
+      - release-pr:
+          context: Release Bot
+          requires:
+            - edahlseng/lint-commit
+            - edahlseng/lint-js
+            - edahlseng/lint-json
+            - edahlseng/lint-yaml
+          filters:
+            branches:
+              only: master
+      - tag-and-npm-publish:
+          context: NPM Publish - @eric.dahlseng
+          requires:
+            - edahlseng/lint-commit
+            - edahlseng/lint-js
+            - edahlseng/lint-json
+            - edahlseng/lint-yaml
+          filters:
+            branches:
+              only: master
