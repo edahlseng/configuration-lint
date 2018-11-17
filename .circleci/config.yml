@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  edahlseng: edahlseng/general@1.0.0
+  edahlseng: edahlseng/general@1.0.1
 
 jobs:
   release-pr:
