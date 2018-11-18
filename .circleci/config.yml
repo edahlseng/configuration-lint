@@ -1,53 +1,48 @@
 version: 2.1
 
 orbs:
-  edahlseng: edahlseng/general@1.0.2
-
-jobs:
-  release-pr:
-    executor: edahlseng/node
-    steps:
-      - edahlseng/release-pr:
-          ssh-fingerprint: 7b:93:ce:c6:ff:f0:80:3d:04:68:e5:db:45:3f:fa:f6
-  tag-and-npm-publish:
-    executor: edahlseng/node
-    steps:
-      - edahlseng/tag-and-npm-publish:
-          ssh-fingerprint: 7b:93:ce:c6:ff:f0:80:3d:04:68:e5:db:45:3f:fa:f6
+  general: edahlseng/general@1.3.1
 
 workflows:
   main:
     jobs:
-      - edahlseng/install-dependencies-npm
-      - edahlseng/lint-commit:
+      - general/install-dependencies-npm
+      - general/lint-commit:
           requires:
-            - edahlseng/install-dependencies-npm
-      - edahlseng/lint-js:
+            - general/install-dependencies-npm
+      - general/lint-js:
           requires:
-            - edahlseng/install-dependencies-npm
-      - edahlseng/lint-json:
+            - general/install-dependencies-npm
+      - general/lint-json:
           requires:
-            - edahlseng/install-dependencies-npm
-      - edahlseng/lint-yaml:
+            - general/install-dependencies-npm
+      - general/lint-yaml:
           requires:
-            - edahlseng/install-dependencies-npm
-      - release-pr:
+            - general/install-dependencies-npm
+      - general/create-release-pr:
           context: Release Bot
+          git-ssh-fingerprint: 7b:93:ce:c6:ff:f0:80:3d:04:68:e5:db:45:3f:fa:f6
+          git-user-email: edahlseng@users.noreply.github.com
+          git-user-name: "Release Bot"
+          github-access-token: $RELEASE_BOT_GITHUB_TOKEN
           requires:
-            - edahlseng/lint-commit
-            - edahlseng/lint-js
-            - edahlseng/lint-json
-            - edahlseng/lint-yaml
+            - general/lint-commit
+            - general/lint-js
+            - general/lint-json
+            - general/lint-yaml
           filters:
             branches:
               only: master
-      - tag-and-npm-publish:
+      - general/tag-and-publish-npm:
           context: NPM Publish - @eric.dahlseng
+          git-ssh-fingerprint: 7b:93:ce:c6:ff:f0:80:3d:04:68:e5:db:45:3f:fa:f6
+          git-user-email: edahlseng@users.noreply.github.com
+          git-user-name: "Release Bot"
           requires:
-            - edahlseng/lint-commit
-            - edahlseng/lint-js
-            - edahlseng/lint-json
-            - edahlseng/lint-yaml
+            - general/lint-commit
+            - general/lint-js
+            - general/lint-json
+            - general/lint-yaml
           filters:
             branches:
               only: master
