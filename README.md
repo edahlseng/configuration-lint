@@ -7,13 +7,13 @@ Installation
 ------------
 
 ```bash
-npm install --save-dev @edahlseng/linter-configuration
+npm install --save-dev @edahlseng/configuration-lint
 ```
 
 Usage
 -----
 
-After installing, run `npx linter-configuration setup [languages]` to set up configuration for the desired languages.
+After installing, run `npx configuration-lint setup [languages]` to set up configuration for the desired languages.
 
 Available languages:
 * `css`
@@ -26,4 +26,4 @@ In addition to configuration for all of the specified languages, the setup scrip
 
 ### Example
 
-Running `npx linter-configuration setup js` will add a `.eslintrc.json` configuration file to the project root, as well as add a `lint:js` NPM run-script to the project's `package.json`. (It will also add a `.prettierrc.js` configuration file, a `.commitlintrc.json` configuration file, a `lint:json` NPM run-script, and a `lint:commit` NPM run-script.)
+Running `npx configuration-lint setup js` will add a `.eslintrc.json` configuration file to the project root, as well as add a `lint:js` NPM run-script to the project's `package.json`. (It will also add a `.prettierrc.js` configuration file, a `.commitlintrc.json` configuration file, a `lint:json` NPM run-script, and a `lint:commit` NPM run-script.)

@@ -10,7 +10,7 @@ import {
 } from "./utils.js";
 
 const eslintConfiguration = `{
-	"extends": ["./node_modules/@eric.dahlseng/linter-configuration/eslintrc.json"]
+	"extends": ["./node_modules/@eric.dahlseng/configuration-lint/eslintrc.json"]
 }
 `;
 

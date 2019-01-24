@@ -10,7 +10,7 @@ import {
 } from "./utils.js";
 
 const commitlintConfiguration = `{
-	"extends": ["./node_modules/@eric.dahlseng/linter-configuration/commitlintrc"]
+	"extends": ["./node_modules/@eric.dahlseng/configuration-lint/commitlintrc"]
 }
 `;
 
