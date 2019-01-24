@@ -4,7 +4,7 @@ import path from "path";
 
 import { setupConfigurationFile } from "./utils.js";
 
-const prettierConfiguration = `module.exports = require('@eric.dahlseng/linter-configuration/prettierrc');\n`;
+const prettierConfiguration = `module.exports = require('@eric.dahlseng/configuration-lint/prettierrc');\n`;
 
 const setupPrettier = (projectRootDirectory: string) =>
 	setupConfigurationFile({

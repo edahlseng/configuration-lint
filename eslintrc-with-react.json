@@ -1,6 +1,6 @@
 {
 	"extends": [
-		"./node_modules/@edahlseng/linter-configuration/eslintrc.json",
+		"./node_modules/@eric.dahlseng/configuration-lint/eslintrc.json",
 		"plugin:react/recommended"
 	],
 	"parserOptions": {

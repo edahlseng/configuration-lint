@@ -10,7 +10,7 @@ import {
 } from "./utils.js";
 
 const stylelintConfiguration = `{
-	"extends": ["@eric.dahlseng/linter-configuration/stylelintrc"]
+	"extends": ["@eric.dahlseng/configuration-lint/stylelintrc"]
 }
 `;
 
