@@ -37,7 +37,6 @@
   "scripts": {
     "build": "babel sources --out-dir dist --copy-files --source-maps inline",
     "eslint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
-    "flow": "flow",
     "lint": "npm run lint:commit -- --from master; npm run lint:js; npm run lint:json; npm run lint:yaml",
     "lint:commit": "commitlint",
     "lint:js": "eslint ./",
@@ -48,7 +47,9 @@
     "lint-report:json": "mkdir -p ./linting-results/prettier-json && ./sources/prettier-junit.sh --config .prettierrc.js '**/*.json' > ./linting-results/prettier-json/report.xml",
     "lint-report:yaml": "mkdir -p ./linting-results/prettier-yaml && ./sources/prettier-junit.sh --config .prettierrc.js '**/*.yaml' '**/*.yml' > ./linting-results/prettier-yaml/report.xml",
     "prepare": "npm run build",
-    "release": "standard-version"
+    "release": "standard-version",
+    "validate": "npm run validate:js",
+    "validate:js": "flow"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.2",
