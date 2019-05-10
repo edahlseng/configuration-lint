@@ -5,16 +5,18 @@ import Future from "fluture";
 import {
 	always,
 	assocPath,
+	curry,
+	flip,
 	ifElse,
+	isEmpty,
 	reduce,
-	over,
-	lensPath,
 	pipe,
 	split,
 	union,
 	sort,
 	join,
 	map,
+	prop,
 	trim,
 } from "ramda";
 import { hasPath } from "ramda-adjunct";
@@ -38,66 +40,57 @@ export const futureSequential = reduce(
 export const deDuplicate = <A: *>(xs: Array<A>): Array<A> =>
 	Array.from(new Set(xs));
 
-export const addNpmScript = ({
-	packageJsonPath,
-	name,
+export const setupConfigurationFile = ({
 	content,
+	path,
 }: {
-	packageJsonPath: string,
-	name: string,
 	content: string,
+	path: string,
 }) =>
-	readUtf8File(packageJsonPath)
+	fileExists(path).chain(
+		ifTrueElse(always(Future.of()), always(writeUtf8FileToPath(content)(path))),
+	);
+
+export const from = flip(prop);
+
+export const assocObject = curry((object: {}, sourceObject: {}) => {
+	const newObject = { ...sourceObject };
+	for (const key in object) {
+		object[key] !== null &&
+		typeof object[key] === "object" &&
+		object[key].constructor === Object &&
+		!isEmpty(object[key])
+			? (newObject[key] = assocObject(object[key], newObject[key]))
+			: (newObject[key] = object[key]);
+	}
+	return newObject;
+});
+
+type setupJsonDataInput = {
+	filePath: string,
+	dataPath: Array<string>,
+	content: string,
+};
+export const setupJsonData = ({
+	filePath,
+	dataPath,
+	content,
+}: setupJsonDataInput) =>
+	readUtf8File(filePath)
 		.chain(jsonParse)
 		.chain(
-			ifElse(hasPath(["scripts", name]), always(Future.of()), packageJson =>
-				writePkg(
-					packageJsonPath,
-					assocPath(["scripts", name], content)(packageJson),
-					{},
-				),
+			ifElse(hasPath(dataPath), always(Future.of()), packageJson =>
+				writePkg(filePath, assocPath(dataPath, content)(packageJson), {}),
 			),
 		);
 
 const localeCompare = (a, b) => a.localeCompare(b);
 
-const addLintStep = step =>
+export const addLintStep = (step: string) =>
 	pipe(
 		split(";"),
 		map(trim),
 		union([trim(step)]),
 		sort(localeCompare),
 		join("; "),
-	);
-
-export const addNpmLintStep = ({
-	packageJsonPath,
-	step,
-}: {
-	packageJsonPath: string,
-	step: string,
-}) =>
-	readUtf8File(packageJsonPath)
-		.chain(jsonParse)
-		.map(
-			ifElse(
-				hasPath(["scripts", "lint"]),
-				over(lensPath(["scripts", "lint"]))(addLintStep(step)),
-				assocPath(["scripts", "lint"])(step),
-			),
-		)
-		.chain(packageJson => writePkg(packageJsonPath, packageJson, {}));
-
-export const setupConfigurationFile = ({
-	configuration,
-	filePath,
-}: {
-	configuration: string,
-	filePath: string,
-}) =>
-	fileExists(filePath).chain(
-		ifTrueElse(
-			always(Future.of()),
-			always(writeUtf8FileToPath(configuration)(filePath)),
-		),
 	);
