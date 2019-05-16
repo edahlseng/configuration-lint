@@ -48,6 +48,7 @@
     "lint-report:yaml": "mkdir -p ./linting-results/prettier-yaml && ./sources/prettier-junit.sh --config .prettierrc.js '**/*.yaml' '**/*.yml' > ./linting-results/prettier-yaml/report.xml",
     "prepare": "npm run build",
     "release": "standard-version",
+    "test": "node ./dist/cli.js",
     "validate": "npm run validate:js",
     "validate:js": "flow"
   },
