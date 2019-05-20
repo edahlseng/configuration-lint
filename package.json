@@ -1,6 +1,6 @@
 {
   "name": "@eric.dahlseng/configuration-lint",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Linter Configuration",
   "bin": {
     "configuration-lint": "./dist/cli.js",
