@@ -131,11 +131,9 @@ const defaultOptions = {
 			},
 			{
 				filePath: "./package.json",
-				dataPath: ["lint-report:js"],
-				content: {
-					extends:
-						"eslint ./ --output-file ./linting-results/eslint/report.xml --format junit",
-				},
+				dataPath: ["scripts", "lint-report:js"],
+				content:
+					"eslint ./ --output-file ./linting-results/eslint/report.xml --format junit",
 			},
 			{
 				filePath: "./package.json",
@@ -170,11 +168,9 @@ const defaultOptions = {
 			},
 			{
 				filePath: "./package.json",
-				dataPath: ["lint-report:yaml"],
-				content: {
-					extends:
-						"mkdir -p ./linting-results/prettier-yaml && prettier-junit --config .prettierrc.js '**/*.yaml' '**/*.yml' > ./linting-results/prettier-yaml/report.xml",
-				},
+				dataPath: ["scripts", "lint-report:yaml"],
+				content:
+					"mkdir -p ./linting-results/prettier-yaml && prettier-junit --config .prettierrc.js '**/*.yaml' '**/*.yml' > ./linting-results/prettier-yaml/report.xml",
 			},
 			{
 				filePath: "./package.json",
